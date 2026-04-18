@@ -22,14 +22,16 @@ body {
 }
 
 nav {
-    background: #020617;
+    background: rgba(2, 6, 23, 0.85);  /* slightly transparent */
     padding: 18px 0;
     text-align: center;
     position: sticky;
     top: 0;
     z-index: 1000;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(56,189,248,0.08);
 }
-
+    
 nav a {
     color: #38bdf8;
     margin: 0 25px;
@@ -94,8 +96,13 @@ h2 {
     margin-bottom: 25px;
     border-radius: 12px;
     transition: 0.3s;
+    border: 1px solid rgba(56,189,248,0.08);
 }
 
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 30px rgba(56,189,248,0.15);
+}
 /* === PROJECT REDESIGN === */
 .featured-project {
     display: grid;
@@ -192,6 +199,18 @@ footer {
     color: #94a3b8;
     margin-top: 50px;
 }
+/* ===== SCROLL ANIMATION ===== */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(80px);
+    transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
 </style>
 </head>
 
@@ -213,7 +232,7 @@ footer {
 <a href="Madhav S Krishna_Resume.pdf" class="btn" target="_blank">Download Resume</a>
 </header>
 
-<section id="about">
+<section id="about" class="reveal">
 <h2>About Me</h2>
 <div class="card">
 <p>
@@ -232,7 +251,7 @@ and reliability-driven engineering analysis.
 </div>
 </section>
 
-<section id="projects">
+<section id="projects" class="reveal">
 <h2>Engineering Projects</h2>
 
 <!-- ================= FLAGSHIP PROJECT ================= -->
@@ -343,7 +362,7 @@ and reliability-driven engineering analysis.
 
 </section>
 
-<section id="skills">
+<section id="skills" class="reveal">
 <h2>Core Competencies</h2>
 
 <h3>Mechanical Design & Fabrication</h3>
@@ -374,7 +393,7 @@ and reliability-driven engineering analysis.
 
 </section>
 
-<section id="leadership">
+<section id="leadership" class="reveal">
 <h2>Leadership & Achievements</h2>
 
 <div class="card">
@@ -382,7 +401,7 @@ and reliability-driven engineering analysis.
 </div>
 
 <div class="card">
-<p><strong>International Cultural Relations Club - Media Lead</strong> – The urge to develop and establish Indo-French Relations in collaboration with MITS Kochi and INP Toulouse,France.</p>
+<p><strong>International Cultural Relations Club - Media Lead</strong> – Contributed to international academic collaboration initiatives between MITS Kochi and INP Toulouse, France.</p>
 </div>
 
 <div class="card">
@@ -394,7 +413,7 @@ and reliability-driven engineering analysis.
 </div>
 
 <div class="card">
-<p><strong>MITS Media Cub - Audio Visuals Sucommmittee Member</strong> – Hobby part of my College Life!.</p>
+<p><strong>MITS Media Cub - Audio Visuals Sucommmittee Member</strong> – Contributed to audio-visual content production for institutional events.</p>
 </div>
 
 <div class="card">
@@ -407,7 +426,7 @@ and reliability-driven engineering analysis.
 
 </section>
 
-<section id="focus">
+<section id="focus" class="reveal">
 <h2>Research & Career Orientation</h2>
 <div class="card">
 <ul>
@@ -419,7 +438,7 @@ and reliability-driven engineering analysis.
 </div>
 </section>
 
-<section id="contact">
+<section id="contact" class="reveal">
 <h2>Contact</h2>
 <div class="card">
 <p>Email: madhavskrishna96@gmail.com</p>
@@ -430,6 +449,23 @@ and reliability-driven engineering analysis.
 <footer>
 © 2026 Madhav S Krishna | Designed & Built by madhav0006
 </footer>
+<script>
+function revealOnScroll() {
+    const reveals = document.querySelectorAll(".reveal");
 
+    reveals.forEach((element) => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const revealPoint = 100;
+
+        if (elementTop < windowHeight - revealPoint) {
+            element.classList.add("active");
+        }
+    });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+</script>
 </body>
 </html>
